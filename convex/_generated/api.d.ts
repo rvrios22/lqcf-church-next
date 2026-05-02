@@ -9,7 +9,7 @@
  */
 
 import type * as http from "../http.js";
-import type * as pastorMessage_getMessage from "../pastorMessage/getMessage.js";
+import type * as pastorMessage from "../pastorMessage.js";
 import type * as users from "../users.js";
 
 import type {
@@ -20,7 +20,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   http: typeof http;
-  "pastorMessage/getMessage": typeof pastorMessage_getMessage;
+  pastorMessage: typeof pastorMessage;
   users: typeof users;
 }>;
 

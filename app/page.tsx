@@ -1,8 +1,17 @@
+"use client";
+
 import HeroImg from "@/components/HeroImg";
 import WhatsGoingOnSquare from "@/components/WhatsGoingOnSquare";
+import PastorsHeartEditor from "@/components/PastorsHeartEditor";
+import { useAdmin } from "@/hooks/useAdmin";
 import whatsGoingOnData from "@/public/data/whatsGoingOnData";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function Home() {
+  const pastorMessage = useQuery(api.pastorMessage.getPastorMessage);
+  console.log(pastorMessage);
+  const {isAdmin} = useAdmin();
   return (
     <>
       <HeroImg name="lqcfHome" text="La Quinta Christian Fellowship Church" />
@@ -33,31 +42,34 @@ export default function Home() {
           />
         ))}
       </section>
-        {/* 
+
       <section className="mb-4">
-        {user ? (
+        {/* 1. Null Check: If no data exists, don't render anything */}
+        {!pastorMessage ? null : isAdmin ? (
+          /* 2. User Check: If logged in, show the Editor */
           <PastorsHeartEditor
-            message={message}
-            author={author}
-            coramDeo={coramDeo}
-            id={1}
+            message={pastorMessage.message}
+            author={pastorMessage.author}
+            coramDeo={pastorMessage.coramDeo}
+            id={pastorMessage._id} // Using the Convex ID instead of hardcoded 1
           />
         ) : (
-          message && (
-            <>
-              <h3 className="sub-header">From Our Pastors Hearts</h3>
-              <p className="general-text text-left whitespace-pre-line">
-                {message}
-              </p>
-              <p className="w-[90%] text-right font-black">- {author}</p>
-              <p className="general-text text-left whitespace-pre-line">
-                <span className="font-bold">Coram Deo: </span>
-                {coramDeo}
-              </p>
-            </>
-          )
+          /* 3. Regular Display: Public View */
+          <>
+            <h3 className="sub-header">From Our Pastors Hearts</h3>
+            <p className="general-text text-left whitespace-pre-line">
+              {pastorMessage.message}
+            </p>
+            <p className="w-[90%] text-right font-black">
+              - {pastorMessage.author}
+            </p>
+            <p className="general-text text-left whitespace-pre-line">
+              <span className="font-bold">Coram Deo: </span>
+              {pastorMessage.coramDeo}
+            </p>
+          </>
         )}
-      </section> */}
+      </section>
     </>
   );
 }

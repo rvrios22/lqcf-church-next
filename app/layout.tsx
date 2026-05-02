@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fira_Sans, Great_Vibes, Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Providers from "@/components/Providers";
 
 export const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -38,7 +39,7 @@ export default function RootLayout({
       className={`${firaSans.variable} ${greatVibes.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
+        <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>
