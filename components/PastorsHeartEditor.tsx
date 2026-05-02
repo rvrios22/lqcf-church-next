@@ -18,18 +18,27 @@ function PastorsHeartEditor({ message, author, coramDeo, id }: PastorMessage) {
   const variant = "bordered";
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const options = {
+
+    const token = sessionStorage.getItem("admin_token");
+
+    const res = await fetch("/api/pastorMessage", {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(formData),
-    };
-    try {
-      addToast({ title: "message successfully updated" });
-    } catch (e) {
-      addToast({ title: `Something went wrong: ${e}` });
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token,
+        ...formData,
+      }),
+    });
+
+    if (res.ok) {
+      addToast({
+        title: "Success",
+        description: "Updated via API",
+        color: "success",
+      });
+    } else {
+      const data = await res.json();
+      addToast({ title: "Error", description: data.error, color: "danger" });
     }
   };
   return (

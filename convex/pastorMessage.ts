@@ -1,8 +1,22 @@
-import { query } from "./_generated/server";
+import { v } from "convex/values";
+import { mutation, query } from "./_generated/server";
 
-export const getPastorMessage = query({
+export const get = query({
   args: {},
-  handler: async (context) => {
-    return await context.db.query("pastorMessage").first();
+  handler: async (ctx) => {
+    return await ctx.db.query("pastorMessage").order("desc").first();
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("pastorMessage"),
+    message: v.string(),
+    author: v.string(),
+    coramDeo: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...content } = args;
+    await ctx.db.patch(id, content);
   },
 });

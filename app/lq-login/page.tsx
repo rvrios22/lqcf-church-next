@@ -12,23 +12,22 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setError("");
-    console.log(email, password)
+    console.log(email, password);
     const res = await fetch("/api/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
-    console.log(res)
 
     if (res.ok) {
-      const { token } = await res.json();
+      const { token, email } = await res.json();
 
       // Store JWT for client-side conditional rendering
       sessionStorage.setItem("admin_token", token);
+      sessionStorage.setItem("admin_email", email);
 
-      // Send them home
+      window.dispatchEvent(new Event("admin-login"));
       router.push("/");
-      router.refresh();
     } else {
       setError("Invalid login credentials.");
     }

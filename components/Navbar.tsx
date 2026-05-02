@@ -1,0 +1,184 @@
+"use client";
+
+import { useAdmin } from "@/hooks/useAdmin";
+import {
+  Button,
+  Dropdown,
+  Navbar as Header,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  NavbarMenuToggle,
+  Link,
+} from "@heroui/react";
+import { useState } from "react";
+
+function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { isAdmin, email } = useAdmin();
+  return (
+    <Header
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      isBordered
+      maxWidth="full"
+    >
+      <NavbarContent justify="start">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <Link href="/">
+            <p className="text-inherit lg:text-2xl">LQCF Church</p>
+          </Link>
+          {isAdmin && <NavbarItem>{email}</NavbarItem>}
+        </NavbarBrand>
+      </NavbarContent>
+      <NavbarContent justify="end" className="hidden gap-4 sm:flex">
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="lg:m4-0 overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent md:mr-4 lg:text-lg"
+                endContent={<img src="./chevron-down.svg" />}
+                radius="sm"
+                variant="light"
+              >
+                Who We Are
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu>
+            <DropdownItem key="elders" href="/elders">
+              Our Elders
+            </DropdownItem>
+            <DropdownItem key="beliefs" href="/beliefs">
+              Who We Are
+            </DropdownItem>
+            <DropdownItem key="current-studies" href="/current-studies">
+              Current Studies
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent lg:text-lg"
+                endContent={<img src="./chevron-down.svg" />}
+                radius="sm"
+                variant="light"
+              >
+                Ministries
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu>
+            <DropdownItem key="mens-study" href="/mens-study">
+              Men's Study
+            </DropdownItem>
+            <DropdownItem key="womens-study" href="/womens-study">
+              Women's Study
+            </DropdownItem>
+            <DropdownItem key="prayer-chain" href="/prayer-chain">
+              Prayer Chain
+            </DropdownItem>
+            <DropdownItem key="identity-youth" href="/identity-youth">
+              Identity Youth
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <NavbarItem>
+          <Link href="/giving">
+            <span className="lg:text-lg">Giving</span>
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/events">
+            <span className="lg:text-lg">Events</span>
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/prayer">
+            <span className="lg:text-lg">Prayer</span>
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      {/* mobile menu */}
+      <NavbarMenu className="items-center justify-center">
+        <NavbarMenuItem>
+          <Link href="/">Home</Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/elders" className="w-full">
+            Our Elders
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/beliefs" className="w-full">
+            What We Believe
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/current-studies" className="w-full">
+            Current Studies
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link
+            href="https://www.youtube.com/@LQCFChurch/streams"
+            className="w-full"
+          >
+            Past Streams
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/mens-study" className="w-full">
+            Men's Study
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/womens-study" className="w-full">
+            Women's Study
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/prayer-chain" className="w-full">
+            Prayer Chain
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/identity-youth" className="w-full">
+            Identity Youth
+          </Link>
+        </NavbarMenuItem>
+
+        <NavbarMenuItem>
+          <Link href="/events" className="w-full">
+            Events
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/giving" className="w-full">
+            Giving
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link href="/prayer" className="w-full">
+            Prayer
+          </Link>
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </Header>
+  );
+}
+
+export default Navbar;

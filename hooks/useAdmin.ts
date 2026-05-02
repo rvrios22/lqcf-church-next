@@ -1,33 +1,33 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export function useAdmin() {
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-  const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // 1. Check for token on mount
+  const checkAuth = () => {
     const token = sessionStorage.getItem("admin_token");
+    const storedEmail = sessionStorage.getItem("admin_email");
 
-    if (token) {
-      // In a more complex app, you could verify the JWT expiry here
+    if (token && storedEmail) {
       setIsAdmin(true);
+      setEmail(storedEmail);
     } else {
       setIsAdmin(false);
+      setEmail(null);
     }
-
     setLoading(false);
-  }, []);
-
-  const logout = () => {
-    sessionStorage.removeItem("admin_token");
-    setIsAdmin(false);
-    router.push("/");
-    router.refresh();
   };
 
-  return { isAdmin, loading, logout };
+  useEffect(() => {
+    checkAuth();
+
+    // Listen for a custom login event
+    window.addEventListener("admin-login", checkAuth);
+    return () => window.removeEventListener("admin-login", checkAuth);
+  }, []);
+
+  return { isAdmin, email, loading };
 }

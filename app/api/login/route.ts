@@ -13,21 +13,21 @@ export async function POST(request: Request) {
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    
+
     const isMatch = await bcrypt.compare(password, user.password);
-    
+
     if (!isMatch) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    
+
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET!,
       { expiresIn: "1h" },
     );
-    
+
     // Return the token directly to the client
-    return NextResponse.json({ token });
+    return NextResponse.json({ token, email: user.email });
   } catch (error) {
     return NextResponse.json({ error: "Server Error" }, { status: 500 });
   }
