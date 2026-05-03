@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         // Matches /api and /api/anything-else
-        source: "/api/:path*",
+        source: "/api",
         destination: "/",
         permanent: true, // 301 Redirect
       },
