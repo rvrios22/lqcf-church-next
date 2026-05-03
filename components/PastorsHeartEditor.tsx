@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
 
 interface PastorMessage {
-  id: number;
+  id: string;
   author: string;
   message: string;
   coramDeo: string;

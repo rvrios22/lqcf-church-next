@@ -10,7 +10,7 @@ export default function Page() {
     email: "",
     message: "",
   });
-  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM_SPREE);
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM_SPREE!);
   const variant = "bordered";
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export default function Page() {
           "There's seems to be an issue in our system. Feel free to call our church or email us and we will pray for you.",
         color: "danger",
       });
-      logError(new Error("something went wrong"), "Prayer Form");
     }
   }, [state.succeeded, state.errors]);
 

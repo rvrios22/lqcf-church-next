@@ -50,7 +50,7 @@ export default function Home() {
             message={pastorMessage.message}
             author={pastorMessage.author}
             coramDeo={pastorMessage.coramDeo}
-            id={pastorMessage._id} // Using the Convex ID instead of hardcoded 1
+            id={pastorMessage._id} 
           />
         ) : (
           /* 3. Regular Display: Public View */

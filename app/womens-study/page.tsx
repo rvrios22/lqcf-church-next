@@ -6,6 +6,8 @@ import PDFModal from "@/components/PDFModal";
 import { api } from "@/convex/_generated/api";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useQuery } from "convex/react";
+import Link from "next/link";
+
 export default function Page() {
   const studies = useQuery(api.studies.get);
   const { isAdmin } = useAdmin();
@@ -48,6 +50,10 @@ export default function Page() {
         defaultStudyId={process.env.NEXT_PUBLIC_WOMEN_STUDY_ID!}
         isAdmin={isAdmin}
       />
+      <p>
+        Check out our <Link href="/events">events</Link> page to confirm our
+        meeting dates
+      </p>
       <p className="general-text">
         Jennifer has a passion for learning and teaching Scripture, and a heart
         for encouraging and leading the women in this ministry. Please feel free

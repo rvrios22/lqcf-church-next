@@ -6,6 +6,7 @@ import PDFModal from "@/components/PDFModal";
 import { api } from "@/convex/_generated/api";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useQuery } from "convex/react";
+import Link from "next/link";
 export default function Page() {
   const studies = useQuery(api.studies.get);
   const { isAdmin } = useAdmin();
@@ -37,6 +38,10 @@ export default function Page() {
         their enemies, but to remain faithful, hopeful and spiritually strong
         and to be overcomers against all that stands opposed to and against Gods
         chosen people, the church.
+      </p>
+      <p>
+        Check out our <Link href="/events">events</Link> page to confirm our
+        meeting dates
       </p>
       <PDFModal
         studies={studies ? studies : []}
