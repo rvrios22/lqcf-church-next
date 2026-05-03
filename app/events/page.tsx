@@ -10,7 +10,7 @@ export default function Page() {
   const events = useQuery(api.monthEvents.get);
   const { isAdmin } = useAdmin();
   return (
-    <>
+    <div className="px-6">
       <h1 className="sub-header">Upcoming Events:</h1>
       {!events ? (
         <p>Loading Events</p>
@@ -28,6 +28,6 @@ export default function Page() {
         ))
       )}
       {isAdmin && <AddEventForm />}
-    </>
+    </div>
   );
 }

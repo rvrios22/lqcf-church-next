@@ -5,6 +5,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { formatDate } from "@/lib/formatDate";
+import { addToast } from "@heroui/react";
 
 interface PDFModalProps {
   studies: { _id: string; title: string }[];
@@ -49,10 +50,17 @@ function PDFModal({ studies, defaultStudyId, isAdmin }: PDFModalProps) {
 
       if (res.ok) {
         // Because useQuery is reactive, the list will update automatically!
-        alert("PDF deleted successfully.");
+        addToast({
+          title: "Deleted",
+          description: "PDF has been deleted",
+          color: "success",
+        });
       } else {
         const data = await res.json();
-        alert(`Error: ${data.error}`);
+        addToast({
+          title: "Something went wrong",
+          color: "danger",
+        });
       }
     } catch (err) {
       console.error("Delete failed:", err);

@@ -111,6 +111,8 @@ function PDFUpload({ studies }: PDFUploadProps) {
         name="date"
         id="date"
         className="border p-2 rounded-md"
+        value={form.date}
+        onChange={(e) => setForm({ ...form, date: e.target.value })}
       />
       <input
         type="file"

@@ -4,7 +4,11 @@ import { mutation, query } from "./_generated/server";
 export const get = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("monthEvents").order("desc").collect();
+    return await ctx.db
+      .query("monthEvents")
+      .withIndex("by_date") // Use the date index
+      .order("asc") // Ascending = Oldest (earliest date) to Newest (latest date)
+      .collect();
   },
 });
 
