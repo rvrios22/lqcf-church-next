@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -12,13 +12,25 @@ interface PDFModalProps {
   isAdmin: boolean;
 }
 function PDFModal({ studies, defaultStudyId, isAdmin }: PDFModalProps) {
-
+  // 1. Initialize with the prop directly
   const [selectedStudyId, setSelectedStudyId] =
     useState<string>(defaultStudyId);
 
-  const pdfs = useQuery(api.pdfs.getByStudy, {
-    studyId: selectedStudyId as Id<"studies">,
-  });
+  // 2. Add a safeguard: If the ID in state isn't in our 'studies' list,
+  // it's likely a cached/wrong ID. Skip the query.
+  const isActuallyAStudy = studies?.some((s) => s._id === selectedStudyId);
+
+  const pdfs = useQuery(
+    api.pdfs.getByStudy,
+    isActuallyAStudy ? { studyId: selectedStudyId as Id<"studies"> } : "skip",
+  );
+
+  // 3. Keep state in sync with the environment variable
+  useEffect(() => {
+    if (defaultStudyId) {
+      setSelectedStudyId(defaultStudyId);
+    }
+  }, [defaultStudyId]);
 
   const handleDelete = async (pdfId: string, storageId: string) => {
     const confirmDelete = window.confirm(

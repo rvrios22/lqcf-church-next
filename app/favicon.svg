@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background Circle for visibility in dark/light mode tabs -->
+  <circle cx="16" cy="16" r="16" fill="#1e293b" /> 
+  <!-- Church / Steeple Shape -->
+  <path d="M16 6 L24 14 V26 H8 V14 L16 6" fill="white" />
+  <!-- Simple Cross -->
+  <rect x="15" y="15" width="2" height="7" fill="#1e293b" />
+  <rect x="12" y="17" width="8" height="2" fill="#1e293b" />
+</svg>

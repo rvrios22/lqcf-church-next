@@ -7,9 +7,9 @@ interface HeroImgTypes {
 
 function HeroImg({ name, text }: HeroImgTypes) {
   return (
-    <div className="relative max-w-4/5 mx-auto my-6  overflow-clip rounded-2xl shadow-md">
+    <div className="relative max-w-4/5 mx-auto my-6  overflow-clip">
       <Image
-        className="m-auto h-[350px] object-cover lg:h-auto transition-opacity duration-1000 opacity-100 [@starting-style]:opacity-0"
+        className="m-auto h-[350px] object-cover lg:h-auto transition-opacity duration-1000 opacity-100 rounded-2xl shadow-md [@starting-style]:opacity-0"
         src={`/imgs/${name}.webp`}
         alt={`${name} header`}
         width={1000}

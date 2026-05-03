@@ -50,8 +50,8 @@ export default function Page() {
         defaultStudyId={process.env.NEXT_PUBLIC_WOMEN_STUDY_ID!}
         isAdmin={isAdmin}
       />
-      <p>
-        Check out our <Link href="/events">events</Link> page to confirm our
+      <p className="general-text">
+        Check out our <Link href="/events" className="underline">events</Link> page to confirm our
         meeting dates
       </p>
       <p className="general-text">

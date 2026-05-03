@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /lq-login
+
+# Host
+Host: https://www.lqcfchurc.org
+
+# Sitemaps
+Sitemap: https://www.lqcfchurc.org/sitemap.xml

@@ -9,6 +9,7 @@ import { useQuery } from "convex/react";
 import Link from "next/link";
 export default function Page() {
   const studies = useQuery(api.studies.get);
+  console.log(studies)
   const { isAdmin } = useAdmin();
   return (
     <>
@@ -39,13 +40,13 @@ export default function Page() {
         and to be overcomers against all that stands opposed to and against Gods
         chosen people, the church.
       </p>
-      <p>
-        Check out our <Link href="/events">events</Link> page to confirm our
+      <p className="general-text">
+        Check out our <Link href="/events" className="underline">events</Link> page to confirm our
         meeting dates
       </p>
       <PDFModal
         studies={studies ? studies : []}
-        defaultStudyId={process.env.NEXT_PUBLIC_MEN_STUDY_ID!}
+        defaultStudyId={process.env.NEXT_PUBLIC_MEN_STUDY_ID || ""}
         isAdmin={isAdmin}
       />
       {isAdmin && studies && <PDFUpload studies={studies} />}
