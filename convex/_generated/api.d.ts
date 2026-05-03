@@ -9,7 +9,10 @@
  */
 
 import type * as http from "../http.js";
+import type * as monthEvents from "../monthEvents.js";
 import type * as pastorMessage from "../pastorMessage.js";
+import type * as pdfs from "../pdfs.js";
+import type * as studies from "../studies.js";
 import type * as users from "../users.js";
 
 import type {
@@ -20,7 +23,10 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   http: typeof http;
+  monthEvents: typeof monthEvents;
   pastorMessage: typeof pastorMessage;
+  pdfs: typeof pdfs;
+  studies: typeof studies;
   users: typeof users;
 }>;
 

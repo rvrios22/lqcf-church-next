@@ -10,7 +10,6 @@ import { api } from "@/convex/_generated/api";
 
 export default function Home() {
   const pastorMessage = useQuery(api.pastorMessage.get);
-  console.log(pastorMessage);
   const {isAdmin} = useAdmin();
   return (
     <>
